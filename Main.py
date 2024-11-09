@@ -1,0 +1,3 @@
+from View import *
+
+initView()
