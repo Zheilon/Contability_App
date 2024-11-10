@@ -1,4 +1,7 @@
 1.  Crear un archivo encargado de las vistas - (View.py).
 
+        1.2. Evitar Descripciones extensas en las funciones.
+
 2.  Crear un archivo encargado del la logica - (Logic.py).
-        2.1 
+
+        2.1. Evitar Descripciones extensas en las funciones.
