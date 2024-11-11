@@ -7,19 +7,25 @@ def principalView():
 
     flag = True
 
-    # Lugar para insertar la funcion: titleProgram()
+    titleProgram()
 
     while flag:
 
-        if menu() == 1:
+        menuSelection = menu()
+
+        if menuSelection == 1:
 
             addMovement()
 
-        elif menu() == 3:
+        elif menuSelection == 2:
+
+            print("\nMaking Function...")
+
+        elif menuSelection == 3:
 
             if not contabilityMatrix: 
 
-                print("No hay datos que mostrar")
+                print("\nNo hay datos que mostrar")
 
             else:
 

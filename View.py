@@ -1,8 +1,10 @@
 from Logic import *
 from tabulate import tabulate
+import locale
 import time
 import os
-import sys
+
+locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 def titleProgram():
 
@@ -22,27 +24,60 @@ def menu():
 
     """Método encargado de mostrar el menú."""
 
-    print("\n1.) Ingresar movimiento\n2.) Consultar utilidad Neta\n3.) Mostrar Contabilidad General")
+    os.system('cls')
 
     while True:
 
-        option = int(input("Selecciona una opción: "))
-        if option >= 1 and option <= 3:
-            return option
-        
-        else:
-            print("\nOpciones no permitidas.\n")
+        print("\n1.) Ingresar movimiento\n\n2.) Consultar utilidad Neta\n\n3.) Mostrar Contabilidad General\n")
+
+        try:
+
+            option = int(input("Selecciona una opción: "))
+
+            if option > 0 and option < 4:
+
+                return option
+            
+            else:
+                
+                os.system('cls')
+
+                print("\nOpciones no permitidas.")
+
+        except ValueError as e:
+
+            os.system('cls')
+
+            print(f"\nSolo se Permiten valores numéricos: {e}")
 
 
 def checkNetProfit() -> None:
     pass
 
+
+def formatMiles(value):
+
+    """Función encarda de darle formato de Miles a los números."""
+
+    return locale.format_string("%d", value, grouping=True)
+
+
 def showGeneralContability():
+    
+    """Función encargada de mostrar la tabla con los ejercicios Contables."""
 
     print()
 
-    headers = ["Fecha", "Código", "Descripción", "Debe", "Haber", "Saldo"]
+    print("| --- * LIBRO DE CAJA AUXILIAR * --- |")
 
-    print(tabulate(contabilityMatrix, headers=headers, tablefmt="pretty"))
+    headers = ["Fecha", "Código", "Descripción", "Debe $", "Haber $", "Saldo De Caja $"]
 
-    sys.stdout.flush()
+    formated = [
+        [row[0], row[1], row[2], 
+         formatMiles(int(row[3])) if row[3] else '', 
+         formatMiles(int(row[4])) if row[4] else '', 
+         formatMiles(int(row[5])) if row[5] else ''] 
+         for row in contabilityMatrix
+    ]
+
+    print(tabulate(formated, headers=headers, tablefmt="fancy_grid"))

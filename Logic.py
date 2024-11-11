@@ -1,21 +1,16 @@
 import os
 import time
 from datetime import date
+
 contabilityMatrix = []
 
 firstMov = True
 
 everyMov = False
 
-def valueSaldo(a, b):
-
-    """Función encargada de calcular el saldo."""
-
-    return a - b
-
 def getDate():
 
-    """Esta función obtiene la fecha escrita por el usuario."""
+    """Esta función obtiene la fecha actual."""
 
     os.system('cls')
 
@@ -30,33 +25,60 @@ def getContabilityCodes():
 
     """Esta función se encarga de primero mostrar y luego, 
     retornar el código seleccionado."""
-
+    
     os.system('cls')
 
-    print("Codigos Disponibles: \n")
+    while True:
 
-    #* VT = VENTAS, CM = COMPRAS, GST = GASTOS #*
+        print("Codigos Disponibles: \n")
 
-    listOfCodes = ["VT", "CM", "GST"]
+        #* VT = VENTAS, CM = COMPRAS, GST = GASTOS #*
 
-    for z in range(len(listOfCodes)):
+        listOfCodes = ["VT", "CM", "GST"]
 
-        print(f"{z + 1}. {listOfCodes[z]}")
+        listCodesDescription = ["VT (Venta)", "CM (Compra)", "GST (Gasto)"]
+    
+        for z in range(len(listCodesDescription)):
 
-    return listOfCodes[(int(input("Selecciona Código: "))) - 1]
+            print(f"{z + 1}. {listCodesDescription[z]}\n")
+
+        try:
+
+            code = int(input("Selecciona Código: "))
+
+            if code > 0 and code < 4:
+
+                return listOfCodes[code - 1]
+            
+            else:
+
+                os.system('cls')
+                
+                print("\nRangos no permitidos.\n")
+
+        except ValueError as vl:
+
+            os.system('cls')    
+            
+            print(f"\nSolo se permiten valores númericos: {vl}.\n")
 
 
 def getDescription():
 
     """Esta función obtiene la descripción escrita por el usuario."""
 
+    os.system('cls')
+
     return str(input("Ingresa Descripción: "))
+
 
 
 def registerMovement(fecha, code, description):
 
     """Esta función se encarga de obtener un valor 'n', para luego adicionarlo
     en una lista, que se añadirá a la matriz principal"""
+
+    os.system('cls')
 
     value = int(input("Ingresa Valor: "))
 
@@ -75,16 +97,16 @@ def registerMovement(fecha, code, description):
 
 def saveAll(date, code, description, debe, haber , saldo):
 
-    """Esta función se encarga de guardar en una lista, todos los elementos
-    necesarios que componen un ejercicio contable."""
+    """Esta función se encarga de guardar en la matriz principal una lista con 
+    todos los elementos necesarios que componen un ejercicio contable."""
 
     contabilityMatrix.append([date, code, description, debe, haber, saldo])
     
 
 def getBalance(value, code):
 
-    """Función encargada de determinar y retornar los 
-    saldos, despues de cada ejercicio contable."""
+    """Función encargada de determinar y retornar el saldo, 
+    despues de cada ejercicio contable."""
 
     global firstMov
 
