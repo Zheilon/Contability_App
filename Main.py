@@ -7,7 +7,7 @@ def principalView():
 
     flag = True
 
-    titleProgram()
+    # Lugar para insertar la funcion: titleProgram()
 
     while flag:
 
@@ -17,7 +17,13 @@ def principalView():
 
         elif menu() == 3:
 
-            showGeneralContability()
+            if not contabilityMatrix: 
+
+                print("No hay datos que mostrar")
+
+            else:
+
+                showGeneralContability()
 
         while True:
 

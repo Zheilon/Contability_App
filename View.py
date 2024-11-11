@@ -1,9 +1,8 @@
 from Logic import *
 from tabulate import tabulate
-from prettytable import PrettyTable
-import pandas as ps
 import time
 import os
+import sys
 
 def titleProgram():
 
@@ -40,4 +39,10 @@ def checkNetProfit() -> None:
 
 def showGeneralContability():
 
-    print(tabulate(listN, headers=["Nombre", "Edad"], tablefmt="grid"))
+    print()
+
+    headers = ["Fecha", "Código", "Descripción", "Debe", "Haber", "Saldo"]
+
+    print(tabulate(contabilityMatrix, headers=headers, tablefmt="pretty"))
+
+    sys.stdout.flush()
