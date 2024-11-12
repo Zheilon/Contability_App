@@ -33,11 +33,9 @@ def menu():
 
     while True:
 
-<<<<<<< HEAD
+
         print("\n1.) Ingresar movimiento\n\n2.) Consultar utilidad Neta\n\n3.) Mostrar Contabilidad General\n")
-=======
         print("\n1.) Ingresar movimiento\n\n2.) Consultar utilidad Neta\n\n3.) Mostrar Contabilidad General\n\n 4) Control de inventario")
->>>>>>> be8422a (Agrege una nueva opcion al menu control de inventario)
 
         try:
 

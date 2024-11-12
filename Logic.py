@@ -152,9 +152,9 @@ def addMovement():
 
     description = getDescription()
 
-<<<<<<< HEAD
+
     registerMovement(fecha, code, description)
-=======
+
     registerMovement(fecha, code, description)
 
 # CONTROL DE INVENTARIO
@@ -316,7 +316,3 @@ def menu1():
 
 
 
-
-
-
->>>>>>> be8422a (Agrege una nueva opcion al menu control de inventario)
