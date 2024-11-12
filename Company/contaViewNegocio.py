@@ -1,4 +1,4 @@
-from ContaLogicPerson import *
+from Company.contaLogicNegocio import *
 from Utils import *
 from tabulate import tabulate
 from datetime import datetime, date
@@ -10,16 +10,16 @@ locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 locale.setlocale(locale.LC_TIME, "es_ES")
 
-saldoInicial = True
+caja = True
 
 
-def mainViewPerson():
+def mainViewCompany():
 
-    global saldoInicial
+    global caja
 
-    if saldoInicial:
+    if caja:
 
-        saldoInicial = False
+        caja = False
 
         initBalanceToMonth()
 
@@ -31,7 +31,7 @@ def mainViewPerson():
 
     elif selectedMenu == 2:
 
-        if not contabilityMatrixPerson: 
+        if not contabilityMatrix: 
 
             printTextEfect("\nTabla vacia\n", timer=0.03)
 
@@ -40,6 +40,8 @@ def mainViewPerson():
         else:
 
             showGeneralContability()
+    elif selectedMenu == 3:
+        menu1()
 
 
 def titleProgram():
@@ -103,7 +105,7 @@ def menuPerson():
 
         print("ContalApp® Personas")
 
-        print("\n1.) Ingresar movimiento\n\n2.) Mostrar Contabilidad General\n")
+        print("\n1.) Ingresar movimiento\n\n2.) Mostrar Contabilidad General\n\n3.)Control de inventario.\n\n 4.)Salir.")
 
         try:
 
@@ -152,10 +154,10 @@ def showGeneralContability():
     headers = ["Fecha", "Código", "Descripción", "Debe $", "Haber $", "Saldo De Caja $"]
 
     formated = [[row[0], row[1], row[2], 
-         formatMiles(int(row[3])) if row[3] else '', 
-         formatMiles(int(row[4])) if row[4] else '', 
-         formatMiles(int(row[5])) if row[5] else ''] 
-         for row in contabilityMatrixPerson
+        formatMiles(int(row[3])) if row[3] else '', 
+        formatMiles(int(row[4])) if row[4] else '', 
+        formatMiles(int(row[5])) if row[5] else ''] 
+        for row in contabilityMatrix
     ]
 
     print(tabulate(formated, headers=headers, tablefmt="fancy_grid"))
@@ -186,3 +188,5 @@ def isPersonOrCompany():
         except ValueError as vl:
 
             print(f"\nSolo se permiten valores numéricos: {vl}\n")
+
+    
