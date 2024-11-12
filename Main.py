@@ -1,5 +1,7 @@
 from Person.ContaViewPerson import *
 from Person.ContaLogicPerson import *
+from Company.contaViewNegocio import *
+from Company.contaLogicNegocio import *
 
 
 def principalView():
@@ -20,9 +22,7 @@ def principalView():
 
         elif selection == 2:
 
-            #Espacio para ubicar la función para empresas.
-            
-            pass
+            mainViewCompany()
 
         while True:
 
