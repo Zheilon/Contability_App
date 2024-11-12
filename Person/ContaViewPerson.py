@@ -12,6 +12,8 @@ locale.setlocale(locale.LC_TIME, "es_ES")
 
 saldoInicial = True
 
+presentacion = True
+
 
 def mainViewPerson():
 
@@ -93,6 +95,27 @@ def initBalanceToMonth():
             os.system('cls')
 
 
+def presentProgram():
+        
+    global presentacion
+    
+    if presentacion:
+
+        print("ContalApp® Personas")
+
+        printTextEfect("\nIngresaste a ContalApp® Personas, con nuestras herramientas,\n", timer=0.03)
+
+        printTextEfect("\npodras llevar un seguimiento más claro de tu contabilidad diaria.\n", timer=0.03)
+
+        printTextEfect("\nD i s f r u t a !\n", timer=0.02)
+
+        time.sleep(1.5)
+
+        os.system('cls')
+
+        presentacion = False
+
+
 def menuPerson():
 
     """Método encargado de mostrar el menú."""
@@ -100,6 +123,8 @@ def menuPerson():
     os.system('cls')
 
     while True:
+
+        presentProgram()
 
         print("ContalApp® Personas")
 
@@ -152,8 +177,8 @@ def showGeneralContability():
     headers = ["Fecha", "Código", "Descripción", "Debe $", "Haber $", "Saldo De Caja $"]
 
     formated = [[row[0], row[1], row[2], 
-         formatMiles(int(row[3])) if row[3] else '', 
-         formatMiles(int(row[4])) if row[4] else '', 
+         formatMiles(int(row[3])) if row[3] else '',
+         formatMiles(int(row[4])) if row[4] else '',
          formatMiles(int(row[5])) if row[5] else ''] 
          for row in contabilityMatrixPerson
     ]

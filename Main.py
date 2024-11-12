@@ -1,6 +1,7 @@
 from Person.ContaViewPerson import *
 from Person.ContaLogicPerson import *
 
+
 def principalView():
 
     """Método encargado de mostrar las vistas."""

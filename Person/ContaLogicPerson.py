@@ -32,7 +32,7 @@ def getContabilityCodes():
 
         print("Codigos Disponibles: \n")
 
-        #* VT = VENTAS, CM = COMPRAS, GST = GASTOS #*
+        #* INT = INGRESOS, CM = COMPRAS, GST = GASTOS #*
 
         listOfCodes = ["ING", "CM", "GST"]
 
@@ -107,7 +107,6 @@ def getBalance(value, code):
 
     """Función encargada de determinar y retornar el saldo, 
     despues de cada ejercicio contable."""
-    
 
     for z in range(len(contabilityMatrixPerson)):
 
