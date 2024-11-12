@@ -157,45 +157,24 @@ def addMovement():
 
     registerMovement(fecha, code, description)
 
-# CONTROL DE INVENTARIO
-inventari=[]
-#primero se creo una lista para almacenar la informacion del inventario
-def addProduct ():
-    code = input(f"Ingrese el codigo del producto")
-    article = input(f"Ingrese el nombre del articulo")
-    price = input(f"Ingrese el precio por unidad del producto")
-    output =0
-    entry = input(f"Ingrese las entradas del producto")
-#el stock es la variable donde se muestra lo que queda en bodega
-    stock= entry-output
-#revision del producto para saber si ya esta documentado en el inventrio
-    estored=False
-    for product in inventari:
-        #si codigo es igual al producto
-        if product["Codigo"] == code:
-            product["Entradas"] += entry
-            product["Salidas"] += output
-            product["Stock"] += product["Entradas"]-product["Salidas"]
-            product["Precio"] = price
-            estored=True
-            print(f"Producto {product["Articulo"]} Actualizado")
-
 #Control de inventario
 
-#lista para almacenar los registros del inventario
+# Inventario inicial (vacío o con datos de prueba)
 inventario = []
 
-# Agregar productos
+# Agregar o actualizar producto
 def agregar_o_actualizar_producto():
     # Pedir al usuario que ingrese los datos
     codigo = input("Ingrese el código del producto: ")
     articulo = input("Ingrese el nombre del artículo: ")
-    precio_unitario = float(input("Ingrese el precio por unidad: ")) 
+    precio_venta = float(input("Ingrese el precio para el cliente: ")) 
+    precio_fabrica = float(input("Ingrese el precio de fabrica por unidad"))
     salidas = 0
     entradas = int(input("Ingrese las entradas del producto: "))
-    #El stock son los productos que quedan almacenados en bodega
+    # El stock son los productos que quedan almacenados en bodega
     stock = entradas - salidas  
-# Revision
+
+    # Revisión
     encontrado = False
     for producto in inventario:
         if producto['Código'] == codigo:
@@ -203,7 +182,8 @@ def agregar_o_actualizar_producto():
             producto['Entradas'] += entradas
             producto['Salidas'] += salidas
             producto['Stock'] = producto['Entradas'] - producto['Salidas']
-            producto['Precio'] = precio_unitario 
+            producto['Precio_venta'] = precio_venta
+            producto['Precio_fabrica'] = precio_fabrica
             encontrado = True
             print(f"Producto {producto['Artículo']} actualizado.")
             break
@@ -213,7 +193,8 @@ def agregar_o_actualizar_producto():
         producto = {
             'Código': codigo,
             'Artículo': articulo,
-            'Precio': precio_unitario,
+            'Precio_venta': precio_venta,
+            'Precio_fabrica': precio_fabrica,
             'Entradas': entradas,
             'Salidas': salidas,
             'Stock': stock,
@@ -221,7 +202,8 @@ def agregar_o_actualizar_producto():
         }
         inventario.append(producto)
         print(f"Producto {articulo} agregado al inventario.")
-# registrar una entrada de producto
+
+# Registrar una entrada de producto
 def registrar_entrada():
     codigo = input("Ingrese el código del producto para la entrada: ")
     cantidad = int(input("Ingrese la cantidad de entradas: "))
@@ -236,7 +218,7 @@ def registrar_entrada():
             return
     print("Producto no encontrado.")
 
-#  salida de producto
+# Registrar una salida de producto
 def registrar_salida():
     codigo = input("Ingrese el código del producto para la salida: ")
     cantidad = int(input("Ingrese la cantidad de salidas: "))
@@ -254,25 +236,26 @@ def registrar_salida():
             return
     print("Producto no encontrado.")
 
-# inventario con los movimientos registrados
+# Mostrar inventario con los movimientos registrados
 def mostrar_inventario():
     # Preparar los encabezados y datos para la tabla
-    encabezados = ['Código', 'Artículo', 'Entradas', 'Salidas', 'Stock', 'Precio Unitario', 'Total Entradas', 'Total Salidas']
+    encabezados = ['Código', 'Artículo', 'Entradas', 'Salidas', 'Stock', 'Precio de venta', 'Precio de fabrica', 'Total Entradas', 'Total Salidas']
     tabla = []
 
     # Generar los datos para la tabla
     for producto in inventario:
-        total_entradas = producto['Entradas'] * producto['Precio']
-        total_salidas = producto['Salidas'] * producto['Precio']
+        total_entradas = producto['Entradas'] * producto['Precio_venta']
+        total_salidas = producto['Salidas'] * producto['Precio_fabrica']
         tabla.append([
             producto['Código'],
             producto['Artículo'],
             producto['Entradas'],
             producto['Salidas'],
             producto['Stock'],
-            f"${producto['Precio']:}",
-            f"${total_entradas:}",
-            f"${total_salidas:}"
+            f"${producto['Precio_venta']:.2f}",   # Formatear con 2 decimales
+            f"${producto['Precio_fabrica']:.2f}",  # Formatear con 2 decimales
+            f"${total_entradas:.2f}",              # Formatear con 2 decimales
+            f"${total_salidas:.2f}"                # Formatear con 2 decimales
         ])
     
     # Mostrar la tabla con tabulate
@@ -280,7 +263,7 @@ def mostrar_inventario():
         print("\nInventario actualizado:")
         print(tabulate(tabla, headers=encabezados, tablefmt='grid'))
         
-        # entradas y salidas de cada producto
+        # Entradas y salidas de cada producto
         for producto in inventario:
             if producto['Movimientos']:
                 print(f"\nMovimientos para el producto {producto['Artículo']} ({producto['Código']}):")
@@ -313,4 +296,3 @@ def menu1():
             break
         else:
             print("Opción inválida, por favor intente de nuevo.")
-

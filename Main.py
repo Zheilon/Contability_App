@@ -21,7 +21,7 @@ def principalView():
 
         elif selection == 2:
             mainViewCompany()
-            
+
         
 
         while True:
