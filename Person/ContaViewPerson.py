@@ -1,4 +1,4 @@
-from ContaLogicPerson import *
+from Person.ContaLogicPerson import *
 from Utils import *
 from tabulate import tabulate
 from datetime import datetime, date
