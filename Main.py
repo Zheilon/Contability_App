@@ -30,6 +30,8 @@ def principalView():
             else:
 
                 showGeneralContability()
+        elif menuSelection == 4:
+            menu1()
 
         while True:
 
