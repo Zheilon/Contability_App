@@ -28,13 +28,13 @@ def menu():
 
     while True:
 
-        print("\n1.) Ingresar movimiento\n\n2.) Consultar utilidad Neta\n\n3.) Mostrar Contabilidad General\n")
+        print("\n1.) Ingresar movimiento\n\n2.) Consultar utilidad Neta\n\n3.) Mostrar Contabilidad General\n\n4.)Control de inventario")
 
         try:
 
             option = int(input("Selecciona una opción: "))
 
-            if option > 0 and option < 4:
+            if option > 0 and option < 5:
 
                 return option
             
