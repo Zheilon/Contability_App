@@ -19,25 +19,8 @@ def principalView():
 
         elif selection == 2:
 
-<<<<<<< HEAD
-            print("\nContabilidad para negocios...En desarrollo.\n")
-=======
-        elif menuSelection == 2:
-
-            print("\nMaking Function...")
-
-        elif menuSelection == 3:
-
-            if not contabilityMatrix: 
-
-                print("\nNo hay datos que mostrar")
-
-            else:
-
-                showGeneralContability()
-        elif menuSelection == 4:
-            opciones()
->>>>>>> 6e2ba563736525beef7340a05540e83989e4177e
+            #Espacio para ubicar la función para empresas.
+            pass
 
         while True:
 
@@ -56,9 +39,4 @@ def principalView():
             else:
                 print("\nIngresa Caracter Correcto!\n")
 
-<<<<<<< HEAD
-
 principalView()
-=======
-principalView()
->>>>>>> 6e2ba563736525beef7340a05540e83989e4177e
