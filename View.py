@@ -33,15 +33,13 @@ def menu():
 
     while True:
 
-
-        print("\n1.) Ingresar movimiento\n\n2.) Consultar utilidad Neta\n\n3.) Mostrar Contabilidad General\n")
         print("\n1.) Ingresar movimiento\n\n2.) Consultar utilidad Neta\n\n3.) Mostrar Contabilidad General\n\n 4) Control de inventario")
 
         try:
 
             option = int(input("Selecciona una opción: "))
 
-            if option > 0 and option < 4:
+            if option > 0 and option < 5:
 
                 return option
             
@@ -83,10 +81,10 @@ def showGeneralContability():
 
     formated = [
         [row[0], row[1], row[2], 
-         formatMiles(int(row[3])) if row[3] else '', 
-         formatMiles(int(row[4])) if row[4] else '', 
-         formatMiles(int(row[5])) if row[5] else ''] 
-         for row in contabilityMatrix
+        formatMiles(int(row[3])) if row[3] else '', 
+        formatMiles(int(row[4])) if row[4] else '', 
+        formatMiles(int(row[5])) if row[5] else ''] 
+        for row in contabilityMatrix
     ]
 
     print(tabulate(formated, headers=headers, tablefmt="fancy_grid"))

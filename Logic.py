@@ -290,7 +290,7 @@ def mostrar_inventario():
         print("El inventario está vacío.")
 
 # Menú principal
-def menu1():
+def opciones():
     while True:
         print("\nMenu:")
         print("1. Agregar o actualizar producto")

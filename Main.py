@@ -31,7 +31,7 @@ def principalView():
 
                 showGeneralContability()
         elif menuSelection == 4:
-            menu1()
+            opciones()
 
         while True:
 
