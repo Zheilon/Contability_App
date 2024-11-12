@@ -1,12 +1,9 @@
+from Utils import *
+from datetime import date
 import os
 import time
-from datetime import date
 
-contabilityMatrix = []
-
-firstMov = True
-
-everyMov = False
+contabilityMatrixPerson = []
 
 
 def getDate():
@@ -15,9 +12,9 @@ def getDate():
 
     os.system('cls')
 
-    print("Fecha obtenida Automaticamente!")
+    printTextEfect("Fecha obtenida Automáticamente!", 0.03)
 
-    time.sleep(1.5)
+    time.sleep(1)
 
     return date.today()
 
@@ -35,9 +32,9 @@ def getContabilityCodes():
 
         #* VT = VENTAS, CM = COMPRAS, GST = GASTOS #*
 
-        listOfCodes = ["VT", "CM", "GST"]
+        listOfCodes = ["ING", "CM", "GST"]
 
-        listCodesDescription = ["VT (Venta)", "CM (Compra)", "GST (Gasto)"]
+        listCodesDescription = ["ING (Ingreso)", "CM (Compra)", "GST (Gasto)"]
     
         for z in range(len(listCodesDescription)):
 
@@ -83,7 +80,7 @@ def registerMovement(fecha, code, description):
 
     value = int(input("Ingresa Valor: "))
 
-    if code == "VT":
+    if code == "ING":
 
         saveAll(fecha, code, description, value, "", getBalance(value, code=code))
 
@@ -101,43 +98,30 @@ def saveAll(date, code, description, debe, haber , saldo):
     """Esta función se encarga de guardar en la matriz principal una lista con 
     todos los elementos necesarios que componen un ejercicio contable."""
 
-    contabilityMatrix.append([date, code, description, debe, haber, saldo])
+    contabilityMatrixPerson.append([date, code, description, debe, haber, saldo])
     
 
 def getBalance(value, code):
 
     """Función encargada de determinar y retornar el saldo, 
     despues de cada ejercicio contable."""
-
-    global firstMov
-
-    global everyMov
-
-    if firstMov:
-
-        firstMov = False
-
-        everyMov = True
-
-        return abs(value)
     
-    if everyMov:
 
-        for z in range(len(contabilityMatrix)):
+    for z in range(len(contabilityMatrixPerson)):
 
-            for w in range(len(contabilityMatrix[0])):
+        for w in range(len(contabilityMatrixPerson[0])):
 
-                if z == len(contabilityMatrix) - 1 and w == 5 and code == "VT":
+            if z == len(contabilityMatrixPerson) - 1 and w == 5 and code == "ING":
 
-                    return contabilityMatrix[z][w] + value
-                
-                elif z == len(contabilityMatrix) - 1 and w == 5 and code == "CM":
+                return contabilityMatrixPerson[z][w] + value
+            
+            elif z == len(contabilityMatrixPerson) - 1 and w == 5 and code == "CM":
 
-                    return contabilityMatrix[z][w] - value
-        
-                elif z == len(contabilityMatrix) - 1 and w == 5 and code == "GST":
+                return contabilityMatrixPerson[z][w] - value
+    
+            elif z == len(contabilityMatrixPerson) - 1 and w == 5 and code == "GST":
 
-                    return contabilityMatrix[z][w] - value
+                return contabilityMatrixPerson[z][w] - value
                 
 
 def addMovement():

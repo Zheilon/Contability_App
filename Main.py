@@ -1,5 +1,5 @@
-from View import *
-from Logic import *
+from ContaViewPerson import *
+from ContaLogicPerson import *
 
 def principalView():
 
@@ -9,40 +9,34 @@ def principalView():
 
     titleProgram()
 
+    selection = isPersonOrCompany()
+
     while flag:
 
-        menuSelection = menu()
+        if selection == 1:
 
-        if menuSelection == 1:
+            mainViewPerson()
 
-            addMovement()
+        elif selection == 2:
 
-        elif menuSelection == 2:
-
-            print("\nMaking Function...")
-
-        elif menuSelection == 3:
-
-            if not contabilityMatrix: 
-
-                print("\nNo hay datos que mostrar")
-
-            else:
-
-                showGeneralContability()
+            print("\nContabilidad para negocios...En desarrollo.\n")
 
         while True:
 
             confirm = str(input("\nDeseas Continuar? S / N: "))
 
             if confirm.upper() == "N":
+
                 flag = False
+
                 break
 
             elif confirm.upper() == "S":
+                
                 break
 
             else:
                 print("\nIngresa Caracter Correcto!\n")
+
 
 principalView()
