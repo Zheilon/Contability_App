@@ -12,11 +12,15 @@ def titleProgram():
     del programa."""
 
     listLetters = ['C','u','e','n','t','a','l','A','p','p']
+
     for z in listLetters:
+
         print(f"{z}")
+
         time.sleep(0.2)
 
     time.sleep(0.6)
+    
     os.system('cls')
     
 
@@ -57,7 +61,7 @@ def checkNetProfit() -> None:
 
 def formatMiles(value):
 
-    """Función encarda de darle formato de Miles a los números."""
+    """Función encargada de darle formato de Miles a los números."""
 
     return locale.format_string("%d", value, grouping=True)
 

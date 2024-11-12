@@ -8,6 +8,7 @@ firstMov = True
 
 everyMov = False
 
+
 def getDate():
 
     """Esta función obtiene la fecha actual."""
@@ -59,7 +60,7 @@ def getContabilityCodes():
         except ValueError as vl:
 
             os.system('cls')    
-            
+
             print(f"\nSolo se permiten valores númericos: {vl}.\n")
 
 
