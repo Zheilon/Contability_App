@@ -23,7 +23,7 @@ def mainViewCompany():
 
         initBalanceToMonth()
 
-    selectedMenu = menuPerson()
+    selectedMenu = menuInventory()
 
     if selectedMenu == 1:
 
@@ -40,7 +40,9 @@ def mainViewCompany():
         else:
 
             showGeneralContability()
+
     elif selectedMenu == 3:
+
         menu1()
 
 
@@ -95,7 +97,7 @@ def initBalanceToMonth():
             os.system('cls')
 
 
-def menuPerson():
+def menuInventory():
 
     """Método encargado de mostrar el menú."""
 

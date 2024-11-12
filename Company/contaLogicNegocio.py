@@ -3,6 +3,7 @@ import time
 from datetime import date
 from datetime import datetime
 from tabulate import tabulate
+from Utils import *
 
 contabilityMatrix = []
 
@@ -17,7 +18,7 @@ def getDate():
 
     os.system('cls')
 
-    print("Fecha obtenida Automaticamente!")
+    printTextEfect("Fecha obtenida Automaticamente!", 0.03)
 
     time.sleep(1.5)
 
@@ -111,35 +112,21 @@ def getBalance(value, code):
     """Función encargada de determinar y retornar el saldo, 
     despues de cada ejercicio contable."""
 
-    global firstMov
+    for z in range(len(contabilityMatrix)):
 
-    global everyMov
+        for w in range(len(contabilityMatrix[0])):
 
-    if firstMov:
+            if z == len(contabilityMatrix) - 1 and w == 5 and code == "VT":
 
-        firstMov = False
+                return contabilityMatrix[z][w] + value
+            
+            elif z == len(contabilityMatrix) - 1 and w == 5 and code == "CM":
 
-        everyMov = True
-
-        return abs(value)
+                return contabilityMatrix[z][w] - value
     
-    if everyMov:
+            elif z == len(contabilityMatrix) - 1 and w == 5 and code == "GST":
 
-        for z in range(len(contabilityMatrix)):
-
-            for w in range(len(contabilityMatrix[0])):
-
-                if z == len(contabilityMatrix) - 1 and w == 5 and code == "VT":
-
-                    return contabilityMatrix[z][w] + value
-                
-                elif z == len(contabilityMatrix) - 1 and w == 5 and code == "CM":
-
-                    return contabilityMatrix[z][w] - value
-        
-                elif z == len(contabilityMatrix) - 1 and w == 5 and code == "GST":
-
-                    return contabilityMatrix[z][w] - value
+                return contabilityMatrix[z][w] - value
                 
 
 def addMovement():
@@ -151,9 +138,6 @@ def addMovement():
     code = getContabilityCodes()
 
     description = getDescription()
-
-
-    registerMovement(fecha, code, description)
 
     registerMovement(fecha, code, description)
 
