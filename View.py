@@ -1,5 +1,6 @@
 from Logic import *
 from tabulate import tabulate
+from datetime import datetime
 import locale
 import time
 import os
@@ -20,7 +21,7 @@ def titleProgram():
         time.sleep(0.2)
 
     time.sleep(0.6)
-    
+
     os.system('cls')
     
 
@@ -32,13 +33,13 @@ def menu():
 
     while True:
 
-        print("\n1.) Ingresar movimiento\n\n2.) Consultar utilidad Neta\n\n3.) Mostrar Contabilidad General\n\n4.)Control de inventario")
+        print("\n1.) Ingresar movimiento\n\n2.) Consultar utilidad Neta\n\n3.) Mostrar Contabilidad General\n")
 
         try:
 
             option = int(input("Selecciona una opción: "))
 
-            if option > 0 and option < 5:
+            if option > 0 and option < 4:
 
                 return option
             
@@ -72,7 +73,9 @@ def showGeneralContability():
 
     print()
 
-    print("| --- * LIBRO DE CAJA AUXILIAR * --- |")
+    fecha = datetime.now().strftime("%B")
+
+    print(f"| --- * LIBRO DE CAJA AUXILIAR * --- |")
 
     headers = ["Fecha", "Código", "Descripción", "Debe $", "Haber $", "Saldo De Caja $"]
 
