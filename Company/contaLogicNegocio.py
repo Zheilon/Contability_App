@@ -22,7 +22,7 @@ def getDate():
 
     time.sleep(1.5)
 
-    return date.today()
+    return datetime.now().strftime("%d/%m/%Y")
 
 
 def getContabilityCodes():
@@ -127,6 +127,17 @@ def getBalance(value, code):
             elif z == len(contabilityMatrix) - 1 and w == 5 and code == "GST":
 
                 return contabilityMatrix[z][w] - value
+            
+
+def getCurrentCashBalance():
+
+    for z in range(len(contabilityMatrix)):
+
+        for w in range(len(contabilityMatrix[0])):
+
+            if z == len(contabilityMatrix) - 1 and w == 5:
+
+                return contabilityMatrix[z][w]
                 
 
 def addMovement():
@@ -211,13 +222,16 @@ def registrar_salida():
     for producto in inventario:
         if producto['Código'] == codigo:
             if cantidad > producto['Stock']:
+
                 print("No hay suficiente stock para realizar la salida.")
                 return
+            
             producto['Salidas'] += cantidad
             producto['Stock'] -= cantidad
             producto['Movimientos'].append({'Tipo': 'Salida', 'Cantidad': cantidad, 'Fecha': fecha})
             print(f"Salida registrada para el producto {producto['Artículo']}.")
             return
+        
     print("Producto no encontrado.")
 
 # Mostrar inventario con los movimientos registrados

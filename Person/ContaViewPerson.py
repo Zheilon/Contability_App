@@ -1,7 +1,7 @@
 from Person.ContaLogicPerson import *
 from Utils import *
 from tabulate import tabulate
-from datetime import datetime, date
+from datetime import datetime
 import locale
 import time
 import os
@@ -15,7 +15,7 @@ saldoInicial = True
 presentacion = True
 
 
-def mainViewPerson():
+def mainViewPerson(user, account):
 
     global saldoInicial
 
@@ -23,9 +23,9 @@ def mainViewPerson():
 
         saldoInicial = False
 
-        initBalanceToMonth()
+        initBalanceToMonth(user)
 
-    selectedMenu = menuPerson()
+    selectedMenu = menuPerson(user, account)
 
     if selectedMenu == 1:
 
@@ -43,6 +43,20 @@ def mainViewPerson():
 
             showGeneralContability()
 
+    elif selectedMenu == 3:
+
+        return 3
+    
+    elif selectedMenu == 4:
+
+        os.system('cls')
+
+        printTextEfect("Saliendo del Programa!\n", 0.02)
+
+        time.sleep(2)
+
+        return 4
+
 
 def titleProgram():
 
@@ -58,15 +72,15 @@ def titleProgram():
     os.system('cls')
 
 
-def initBalanceToMonth():
+def initBalanceToMonth(user):
 
     month = datetime.now().strftime("%B")
 
-    fecha = date.today()
+    fecha = datetime.now().strftime("%d/%m/%Y")
 
     os.system('cls')
 
-    printTextEfect("\nAntes de seguir...\n", timer=0.03)
+    printTextEfect(f"\n{user}! Antes de seguir...\n", timer=0.03)
 
     printTextEfect(f"\nPrimero necesitas establecer el efectivo de caja inicial para el mes {month:}!\n\n", timer=0.03)
 
@@ -101,8 +115,6 @@ def presentProgram():
     
     if presentacion:
 
-        print("ContalApp® Personas")
-
         printTextEfect("\nIngresaste a ContalApp® Personas, con nuestras herramientas,\n", timer=0.03)
 
         printTextEfect("\npodras llevar un seguimiento más claro de tu contabilidad diaria.\n", timer=0.03)
@@ -116,9 +128,11 @@ def presentProgram():
         presentacion = False
 
 
-def menuPerson():
+def menuPerson(user, account):
 
     """Método encargado de mostrar el menú."""
+
+    charOne = "+"
 
     os.system('cls')
 
@@ -126,15 +140,61 @@ def menuPerson():
 
         presentProgram()
 
-        print("ContalApp® Personas")
+        information = informationProfile(user, account, "Personas", getCurrentCashBalance())
 
-        print("\n1.) Ingresar movimiento\n\n2.) Mostrar Contabilidad General\n")
+        distance = len(information) - 1
+
+        print()
+
+        for z in range(len(information)):
+
+            if z == 0: 
+                
+                print(end="+")
+
+            elif z == len(information) - 1:
+
+                print(end="+")
+
+            else:
+
+                print(end="-")
+
+        print()
+
+        listOptions = ["1.) Ingresar movimiento", "2.) Mostrar Contabilidad General", "3.) Retornar al menú de selección.", "4.) Salir del Programa."]
+
+        for z in range(len(listOptions)):
+
+            if z < len(listOptions) - 1:
+
+                print(f"| {listOptions[z]:<{distance - 2}}|\n{charOne:<{distance}}+")
+
+            else: 
+                
+                print(f"| {listOptions[z]:<{distance - 2}}|")
+
+        for z in range(len(information)):
+
+            if z == 0: 
+                
+                print(end="+")
+
+            elif z == len(information) - 1:
+
+                print(end="+")
+
+            else:
+
+                print(end="-")
+
+        print()
 
         try:
 
             option = int(input("Selecciona una opción: "))
 
-            if option > 0 and option < 4:
+            if option > 0 and option < 5:
 
                 return option
             
@@ -186,28 +246,20 @@ def showGeneralContability():
     print(tabulate(formated, headers=headers, tablefmt="fancy_grid"))
 
 
-def isPersonOrCompany():
+def setNameUser():
 
-    printTextEfect("Hola!", 0.03)
+    """Función encargada de establecer el nombre del usuario."""
+
+    os.system('cls')
+
+    printTextEfect("Establece un nombre de usuario!\n", 0.03)
 
     time.sleep(1.1)
 
     os.system('cls')
 
-    print("ContalApp®\n")
+    return str(input("Username: "))
 
-    printTextEfect("Vas a manejar esta aplicación para: \n", 0.03)
+def showExcelTable():
 
-    printTextEfect("\n1.) Uso personal.\n", 0.03)
-
-    printTextEfect("\n2.) Negocio y/o Emprendimiento.\n\n", 0.03)
-
-    while True:
-
-        try: 
-            
-            return int(input("Selecciona opción: "))
-        
-        except ValueError as vl:
-
-            print(f"\nSolo se permiten valores numéricos: {vl}\n")
+    print(tabulate(functionExample(), tablefmt="fancy_grid"))

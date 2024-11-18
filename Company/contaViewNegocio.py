@@ -2,6 +2,7 @@ from Company.contaLogicNegocio import *
 from Utils import *
 from tabulate import tabulate
 from datetime import datetime, date
+import pandas
 import locale
 import time
 import os
@@ -12,8 +13,10 @@ locale.setlocale(locale.LC_TIME, "es_ES")
 
 caja = True
 
+presentacion = True
 
-def mainViewCompany():
+
+def mainViewCompany(user, account):
 
     global caja
 
@@ -21,9 +24,9 @@ def mainViewCompany():
 
         caja = False
 
-        initBalanceToMonth()
+        initBalanceToMonth(user)
 
-    selectedMenu = menuInventory()
+    selectedMenu = menuInventory(user, account)
 
     if selectedMenu == 1:
 
@@ -45,6 +48,14 @@ def mainViewCompany():
 
         menu1()
 
+    elif selectedMenu == 4:
+
+        return 4
+    
+    elif selectedMenu == 5:
+
+        return 5
+
 
 def titleProgram():
 
@@ -60,7 +71,7 @@ def titleProgram():
     os.system('cls')
 
 
-def initBalanceToMonth():
+def initBalanceToMonth(user):
 
     month = datetime.now().strftime("%B")
 
@@ -68,7 +79,7 @@ def initBalanceToMonth():
 
     os.system('cls')
 
-    printTextEfect("\nAntes de seguir...\n", timer=0.03)
+    printTextEfect(f"\n{user}! Antes de seguir...\n", timer=0.03)
 
     printTextEfect(f"\nPrimero necesitas establecer el efectivo de caja inicial para el mes {month:}!\n\n", timer=0.03)
 
@@ -97,7 +108,7 @@ def initBalanceToMonth():
             os.system('cls')
 
 
-def menuInventory():
+def menuInventory(user, account):
 
     """Método encargado de mostrar el menú."""
 
@@ -105,15 +116,17 @@ def menuInventory():
 
     while True:
 
-        print("ContalApp® Personas")
+        presentProgram()
 
-        print("\n1.) Ingresar movimiento\n\n2.) Mostrar Contabilidad General\n\n3.)Control de inventario.\n\n 4.)Salir.")
+        information = informationProfile(user, account, "Empresas", getCurrentCashBalance())
+
+        print("\n1.) Ingresar movimiento\n\n2.) Mostrar Contabilidad General\n\n3.) Control de inventario.\n\n4.) Retornar al menú de selección.\n\n5.) Salir\n")
 
         try:
 
             option = int(input("Selecciona una opción: "))
 
-            if option > 0 and option < 4:
+            if option > 0 and option < 6:
 
                 return option
             
@@ -128,6 +141,27 @@ def menuInventory():
             os.system('cls')
 
             print(f"\nSolo se Permiten valores numéricos: {e}")
+
+
+def presentProgram():
+        
+    global presentacion
+    
+    if presentacion:
+
+        printTextEfect("\nIngresaste a ContalApp® Empresas, con nuestras herramientas,\n", timer=0.03)
+
+        printTextEfect("\npodras llevar un seguimiento más claro y detallado de los moviemientos\n", timer=0.03)
+
+        printTextEfect("\ngenerados por tu empresa.\n", timer=0.03)
+
+        printTextEfect("\nD i s f r u t a !\n", timer=0.02)
+
+        time.sleep(1.5)
+
+        os.system('cls')
+
+        presentacion = False
 
 
 def checkNetProfit() -> None:
@@ -163,32 +197,4 @@ def showGeneralContability():
     ]
 
     print(tabulate(formated, headers=headers, tablefmt="fancy_grid"))
-
-
-def isPersonOrCompany():
-
-    printTextEfect("Hola!", 0.03)
-
-    time.sleep(1.1)
-
-    os.system('cls')
-
-    print("ContalApp®\n")
-
-    printTextEfect("Vas a manejar esta aplicación para: \n", 0.03)
-
-    printTextEfect("\n1.) Uso personal.\n", 0.03)
-
-    printTextEfect("\n2.) Negocio y/o Emprendimiento.\n\n", 0.03)
-
-    while True:
-
-        try: 
-            
-            return int(input("Selecciona opción: "))
-        
-        except ValueError as vl:
-
-            print(f"\nSolo se permiten valores numéricos: {vl}\n")
-
     

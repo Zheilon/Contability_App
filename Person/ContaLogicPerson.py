@@ -1,7 +1,7 @@
 from Utils import *
-from datetime import date
 from datetime import datetime
 from tabulate import tabulate
+import pandas as pd
 import os
 import time
 
@@ -18,7 +18,7 @@ def getDate():
 
     time.sleep(1)
 
-    return date.today()
+    return datetime.now().strftime("%d/%m/%Y")
 
 
 def getContabilityCodes():
@@ -123,6 +123,19 @@ def getBalance(value, code):
             elif z == len(contabilityMatrixPerson) - 1 and w == 5 and code == "GST":
 
                 return contabilityMatrixPerson[z][w] - value
+            
+
+def getCurrentCashBalance():
+
+    """Función encargada de obtener el saldo de caja actual."""
+
+    for z in range(len(contabilityMatrixPerson)):
+
+        for w in range(len(contabilityMatrixPerson[0])):
+
+            if z == len(contabilityMatrixPerson) - 1 and w == 5:
+
+                return contabilityMatrixPerson[z][w]
                 
 
 def addMovement():
@@ -136,3 +149,12 @@ def addMovement():
     description = getDescription()
 
     registerMovement(fecha, code, description)
+
+
+def functionExample() -> list[list]:
+
+    df = pd.read_excel("work.xlsx", sheet_name="Hoja 1")
+
+    listExcel = df.values.tolist()
+
+    return listExcel
