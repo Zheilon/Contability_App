@@ -85,19 +85,25 @@ def initBalanceToMonth(user):
 
     while True:
 
-        efectivoInicial = int(input("Ingresa efectivo de caja inicial: "))
+        try:
 
-        if efectivoInicial > 0:
+            efectivoInicial = int(input("Ingresa efectivo de caja inicial: "))
 
-            saveAll(fecha, "EFI", "Efectivo de caja inicial", "", "", efectivoInicial)
+            if efectivoInicial > 0:
 
-            printTextEfect(f"\nPerfecto! estableciste un efectivo inicial de: $ {efectivoInicial:,.0f}.\n", timer=0.03)
+                saveAll(fecha, "EFI", "Efectivo de caja inicial", "", "", efectivoInicial)
 
-            printTextEfect("\nContinuemos!\n", timer=0.03)
+                printTextEfect(f"\nPerfecto! estableciste un efectivo inicial de: $ {efectivoInicial:,.0f}.\n", timer=0.03)
 
-            time.sleep(1.1)
+                printTextEfect("\nContinuemos!\n", timer=0.03)
 
-            break
+                time.sleep(1.1)
+
+                break
+
+        except ValueError as vl:
+
+            print("\nSolo se permiten caracteres numéricos!\n")
 
         else:
 
@@ -112,6 +118,8 @@ def menuInventory(user, account):
 
     """Método encargado de mostrar el menú."""
 
+    charOne = "+"
+
     os.system('cls')
 
     while True:
@@ -120,7 +128,53 @@ def menuInventory(user, account):
 
         information = informationProfile(user, account, "Empresas", getCurrentCashBalance())
 
-        print("\n1.) Ingresar movimiento\n\n2.) Mostrar Contabilidad General\n\n3.) Control de inventario.\n\n4.) Retornar al menú de selección.\n\n5.) Salir\n")
+        distance = len(information) - 1
+
+        print()
+
+        for z in range(len(information)):
+
+            if z == 0:
+
+                print(end="+")
+
+            elif z == distance:
+
+                print(end="+")
+
+            else:
+
+                print(end="-")
+
+        print()
+
+        listOptions = ["1.) Ingresar movimiento", "2.) Mostrar Contabilidad General", "3.) Control de inventario.", "4.) Retornar al menú de selección.", "5.) Salir"]
+
+        for z in range(len(listOptions)):
+
+            if z < len(listOptions) - 1:
+
+                print(f"| {listOptions[z]:<{distance - 2}}|\n{charOne:<{distance}}+")
+
+            else:
+
+                print(f"| {listOptions[z]:<{distance - 2}}|")
+
+        for z in range(len(information)):
+
+            if z == 0:
+
+                print(end="+")
+
+            elif z == distance:
+
+                print(end="+")
+
+            else: 
+
+                print(end="-")
+
+        print()
 
         try:
 

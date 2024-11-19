@@ -86,19 +86,25 @@ def initBalanceToMonth(user):
 
     while True:
 
-        efectivoInicial = int(input("Ingresa efectivo de caja inicial: "))
+        try:
 
-        if efectivoInicial > 0:
+            efectivoInicial = int(input("Ingresa efectivo de caja inicial: "))
 
-            saveAll(fecha, "EFI", "Efectivo de caja inicial", "", "", efectivoInicial)
+            if efectivoInicial > 0:
 
-            printTextEfect(f"\nPerfecto! estableciste un efectivo inicial de: $ {efectivoInicial:,.0f}.\n", timer=0.03)
+                saveAll(fecha, "EFI", "Efectivo de caja inicial", "", "", efectivoInicial)
 
-            printTextEfect("\nContinuemos!\n", timer=0.03)
+                printTextEfect(f"\nPerfecto! estableciste un efectivo inicial de: $ {efectivoInicial:,.0f}.\n", timer=0.03)
 
-            time.sleep(1.1)
+                printTextEfect("\nContinuemos!\n", timer=0.03)
 
-            break
+                time.sleep(1.1)
+
+                break
+        
+        except ValueError as vl:
+
+            print("\nSolo se permiten caracteres numéricos!\n")
 
         else:
 
@@ -152,7 +158,7 @@ def menuPerson(user, account):
                 
                 print(end="+")
 
-            elif z == len(information) - 1:
+            elif z == distance:
 
                 print(end="+")
 
@@ -180,7 +186,7 @@ def menuPerson(user, account):
                 
                 print(end="+")
 
-            elif z == len(information) - 1:
+            elif z == distance:
 
                 print(end="+")
 
