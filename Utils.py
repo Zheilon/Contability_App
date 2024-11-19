@@ -2,6 +2,8 @@ import os
 import sys
 import time
 
+programVersion = "ContalApp -V 1.7"
+
 
 def printTextEfect(text, timer):
 
