@@ -10,6 +10,8 @@ locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 locale.setlocale(locale.LC_TIME, "es_ES")
 
+version = "ContalApp -V 1.7"
+
 saldoInicial = True
 
 presentacion = True
@@ -138,6 +140,8 @@ def menuPerson(user, account):
 
     """Método encargado de mostrar el menú."""
 
+    global version
+
     charOne = "+"
 
     os.system('cls')
@@ -180,6 +184,8 @@ def menuPerson(user, account):
                 
                 print(f"| {listOptions[z]:<{distance - 2}}|")
 
+        distacesToVersion = distance - (len(version) - 1)
+
         for z in range(len(information)):
 
             if z == 0: 
@@ -190,9 +196,17 @@ def menuPerson(user, account):
 
                 print(end="+")
 
-            else:
+            elif z < distacesToVersion:
 
                 print(end="-")
+
+            elif z > distacesToVersion: 
+
+                for z in version:
+
+                    print(end=f"{z}")
+
+                break
 
         print()
 
