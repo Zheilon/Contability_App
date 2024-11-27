@@ -3,6 +3,7 @@ from Utils import *
 from tabulate import tabulate
 from datetime import datetime
 import locale
+import sys
 import time
 import os
 
@@ -14,8 +15,12 @@ saldoInicial = True
 
 presentacion = True
 
+Truly = False
+
 
 def mainViewPerson(user, account):
+
+    global Truly
 
     global saldoInicial
 
@@ -41,7 +46,7 @@ def mainViewPerson(user, account):
         
         else:
 
-            showGeneralContability()
+            showGeneralContability(contabilityMatrixPerson)
 
     elif selectedMenu == 3:
 
@@ -56,6 +61,16 @@ def mainViewPerson(user, account):
         time.sleep(2)
 
         return 4
+    
+    elif selectedMenu == 5: 
+
+        os.system('cls')
+
+        headers = ["Fecha", "Código", "Descripción", "Debe $", "Haber $", "Saldo De Caja $"]
+
+        listing = searchPerDays()
+
+        print(tabulate(listing, headers=headers, tablefmt="fancy_grid"))
 
 
 def titleProgram():
@@ -168,7 +183,7 @@ def menuPerson(user, account):
 
         print()
 
-        listOptions = ["1.) Ingresar movimiento", "2.) Mostrar Contabilidad General", "3.) Retornar al menú de selección.", "4.) Salir del Programa."]
+        listOptions = ["1.) Ingresar movimiento", "2.) Mostrar Contabilidad General", "3.) Retornar al menú de selección.", "4.) Salir del Programa.", "5.) Mostrar concepto respecto a fecha."]
 
         for z in range(len(listOptions)):
 
@@ -210,7 +225,7 @@ def menuPerson(user, account):
 
             option = int(input("Selecciona una opción: "))
 
-            if option > 0 and option < 5:
+            if option > 0 and option < 6:
 
                 return option
             
@@ -238,7 +253,7 @@ def formatMiles(value):
     return locale.format_string("%d", value, grouping=True)
 
 
-def showGeneralContability():
+def showGeneralContability(matrix):
     
     """Función encargada de mostrar la tabla con los ejercicios Contables."""
 
@@ -256,7 +271,7 @@ def showGeneralContability():
          formatMiles(int(row[3])) if row[3] else '',
          formatMiles(int(row[4])) if row[4] else '',
          formatMiles(int(row[5])) if row[5] else ''] 
-         for row in contabilityMatrixPerson
+         for row in matrix
     ]
 
     print(tabulate(formated, headers=headers, tablefmt="fancy_grid"))

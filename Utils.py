@@ -1,8 +1,9 @@
+from tabulate import tabulate
 import os
 import sys
 import time
 
-programVersion = "ContalApp -V 1.7"
+programVersion = "ContalApp -V 1.8"
 
 
 def printTextEfect(text, timer):
@@ -17,6 +18,13 @@ def printTextEfect(text, timer):
         sys.stdout.flush()
 
         time.sleep(timer)
+
+
+def showAnyTable(matrix, header):
+
+    """Muestra cualquier matriz."""
+
+    print(tabulate(matrix, headers=header, tablefmt="fancy_grid"))
 
 
 def isPersonOrCompany():

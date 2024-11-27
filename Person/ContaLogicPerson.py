@@ -136,7 +136,34 @@ def getCurrentCashBalance():
             if z == len(contabilityMatrixPerson) - 1 and w == 5:
 
                 return contabilityMatrixPerson[z][w]
-                
+            
+
+def searchPerDays():
+
+    """Función encargada de buscar concepto mediante ciertas fechas."""
+
+    matrixReturned = []
+
+    date = str(input("Ingresa fecha ( ddd/mmm/YYY ): "))
+
+    os.system('cls')
+
+    listCodesDescription = ["ING", "CM", "GST"]
+    
+    for z in range(len(listCodesDescription)):
+
+        print(f"{z + 1}. {listCodesDescription[z]}\n")
+
+    concept = int(input("Ingresa Concepto: "))
+
+    for z in range(len(contabilityMatrixPerson)):
+
+        if contabilityMatrixPerson[z][0] == date and contabilityMatrixPerson[z][1] == listCodesDescription[concept - 1]:
+
+            matrixReturned.append(contabilityMatrixPerson[z])
+
+    return matrixReturned
+
 
 def addMovement():
 
