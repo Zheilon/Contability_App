@@ -98,5 +98,3 @@ def informationProfile(user, account, type, cashBalance):
     decorationProfile(info)
 
     return info
-
-

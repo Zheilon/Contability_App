@@ -250,10 +250,10 @@ def mostrar_inventario():
             producto['Entradas'],
             producto['Salidas'],
             producto['Stock'],
-            f"${producto['Precio_venta']:.2f}",   # Formatear con 2 decimales
-            f"${producto['Precio_fabrica']:.2f}",  # Formatear con 2 decimales
-            f"${total_entradas:.2f}",              # Formatear con 2 decimales
-            f"${total_salidas:.2f}"                # Formatear con 2 decimales
+            f"${producto['Precio_venta']:,.2f}",   # Formatear con 2 decimales
+            f"${producto['Precio_fabrica']:,.2f}",  # Formatear con 2 decimales
+            f"${total_entradas:,.2f}",              # Formatear con 2 decimales
+            f"${total_salidas:,W.2f}"                # Formatear con 2 decimales
         ])
     
     # Mostrar la tabla con tabulate

@@ -3,7 +3,6 @@ from Utils import *
 from tabulate import tabulate
 from datetime import datetime
 import locale
-import sys
 import time
 import os
 
@@ -38,7 +37,7 @@ def mainViewPerson(user, account):
 
     elif selectedMenu == 2:
 
-        if not contabilityMatrixPerson: 
+        if not contabilityMatrixPerson:
 
             printTextEfect("\nTabla vacia\n", timer=0.03)
 
@@ -70,7 +69,7 @@ def mainViewPerson(user, account):
 
         listing = searchPerDays()
 
-        print(tabulate(listing, headers=headers, tablefmt="fancy_grid"))
+        showAnyTable(listing, headers)
 
 
 def titleProgram():

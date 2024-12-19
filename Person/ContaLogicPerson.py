@@ -145,7 +145,7 @@ def searchPerDays():
     matrixReturned = []
 
     date = str(input("Ingresa fecha ( ddd/mmm/YYY ): "))
-
+    
     os.system('cls')
 
     listCodesDescription = ["ING", "CM", "GST"]
