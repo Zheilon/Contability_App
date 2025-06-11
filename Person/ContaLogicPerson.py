@@ -46,7 +46,7 @@ def getContabilityCodes():
 
             code = int(input("Selecciona Código: "))
 
-            if code > 0 and code < 4:
+            if 0 < code < 4:
 
                 return listOfCodes[code - 1]
             
@@ -95,7 +95,7 @@ def registerMovement(fecha, code, description):
         saveAll(fecha, code, description, "", value, getBalance(value, code=code))
 
 
-def saveAll(date, code, description, debe, haber , saldo):
+def saveAll(date, code, description, debe, haber, saldo):
 
     """Esta función se encarga de guardar en la matriz principal una lista con 
     todos los elementos necesarios que componen un ejercicio contable."""
@@ -115,11 +115,11 @@ def getBalance(value, code):
             if z == len(contabilityMatrixPerson) - 1 and w == 5 and code == "ING":
 
                 return contabilityMatrixPerson[z][w] + value
-            
+
             elif z == len(contabilityMatrixPerson) - 1 and w == 5 and code == "CM":
 
                 return contabilityMatrixPerson[z][w] - value
-    
+
             elif z == len(contabilityMatrixPerson) - 1 and w == 5 and code == "GST":
 
                 return contabilityMatrixPerson[z][w] - value
@@ -130,11 +130,8 @@ def getCurrentCashBalance():
     """Función encargada de obtener el saldo de caja actual."""
 
     for z in range(len(contabilityMatrixPerson)):
-
         for w in range(len(contabilityMatrixPerson[0])):
-
             if z == len(contabilityMatrixPerson) - 1 and w == 5:
-
                 return contabilityMatrixPerson[z][w]
             
 
